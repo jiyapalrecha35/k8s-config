@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:   #desired state of object
+  replicas: 3  # Specifies the desired number of replicas.
+  selector:
+    matchLabels:
+      app: myapp  # Selects pods with the label "app=myapp" to be managed by deployment
+  template:  #for creating new pods
+    metadata:
+      labels:
+        app: myapp  # Labels applied to the pods created by this Deployment.
+    spec:
+      containers:
+      - name: myapp  # Name of the container.
+        image: nginx:1.14.2  # Docker image to use.

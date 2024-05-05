@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: review
+  labels:
+    app: review
+spec:
+  replicas: 1
+  template:  #pod ka specification
+    metadata:
+      name: review
+      labels:
+        app: review
+    spec:
+      containers:
+      - name: review
+        image: jiya2802/reviewms:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: k8s
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: review
